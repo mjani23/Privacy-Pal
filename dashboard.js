@@ -105,3 +105,8 @@ logoutButton.addEventListener("click", () => {
         console.error("Error logging out: ", error);
     });
 });
+
+const snapshotGrabberButton = document.getElementById("snapshotGrabber");
+snapshotGrabberButton.addEventListener("click", () => {
+    window.location.href = "snapshot.html";
+});
