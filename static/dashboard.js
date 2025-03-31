@@ -73,7 +73,6 @@ async function loadApplications() {
         querySnapshot.forEach((doc) => {
             const appData = doc.data();
             
-            // **Ignore placeholder document**
             if (doc.id === "placeholder" || !appData.name) {
                 return;
             }
@@ -97,7 +96,6 @@ async function loadApplications() {
     }
 }
 
-//logout
 logoutButton.addEventListener("click", () => {
     signOut(auth).then(() => {
         window.location.href = "login.html"; 
@@ -107,6 +105,8 @@ logoutButton.addEventListener("click", () => {
 });
 
 const snapshotGrabberButton = document.getElementById("snapshotGrabber");
-snapshotGrabberButton.addEventListener("click", () => {
-    window.location.href = "snapshot.html";
-});
+if (snapshotGrabberButton) {
+    snapshotGrabberButton.addEventListener("click", () => {
+        window.location.href = "/snapshot";
+    });
+}

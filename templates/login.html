@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script type="module" src="{{ url_for('static', filename='login.js') }}" defer></script>
+</head>
+<body>
+    <div id="container">
+        <form id="signupForm">
+            <h2>Login</h2>
+
+            <input type="email" id="email" placeholder="Enter your Email" required>
+            <input type="password" id="password" placeholder="Enter your Password" required>
+
+            <button id="login">Login</button>
+
+            <p>Don't have an account?</p>
+            <p>Create Account <a href="{{ url_for('create_account') }}">Here</a></p>
+            <p><a href="#" id="reset-password">Forgot Password?</a></p>
+        </form>
+    </div>  
+</body>
+</html>
