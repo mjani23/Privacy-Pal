@@ -7,6 +7,10 @@ CORS(app)
 
 @app.route("/")
 
+@app.route("/privacy_finder")
+def privacy_finder():
+    return render_template("privacy_finder.html")
+
 #Routes for web pages 
 @app.route("/login")
 def login():
@@ -25,8 +29,8 @@ def snapshot():
     return render_template("snapshot.html")
 
 
-@app.route("/snapshots", methods=["POST"])
 #this grabs the snaphots used sumilar code to mentors given code, adjusted to work for our needs  
+@app.route("/snapshots", methods=["POST"])
 def get_snapshots():
     data = request.get_json()
     url = data.get("url", "").strip()
@@ -37,7 +41,8 @@ def get_snapshots():
 
     base_url = f"https://web.archive.org/cdx/search/cdx?url={url}&output=json&fl=timestamp,original&collapse=digest"
 
-    if date:
+
+    if date: # If given date, filter for that day 
         try:
             yyyymmdd = date.replace("-", "")
             from_date = f"{yyyymmdd}000000"
@@ -57,6 +62,8 @@ def get_snapshots():
         if len(data) <= 1:
             return []
 
+        # makes timestamps into Wayback snapshot URLs
+
         results = [
             f"https://web.archive.org/web/{timestamp}/{original}"
             for timestamp, original in data[1:]
@@ -69,6 +76,24 @@ def get_snapshots():
         return results
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+#imports the extract_privacy_links function from the extract_privacy.py file
+from extract_privacy import extract_privacy_links
+
+@app.route("/extract-privacy", methods=["POST"])
+
+#grabs our privacy policy links 
+def extract_privacy():
+    data = request.get_json()
+    snapshot_url = data.get("snapshot_url", "").strip()
+    if not snapshot_url:
+        return jsonify({"error": "No snapshot URL provided"}), 400
+
+    links = extract_privacy_links(snapshot_url)
+
+    return jsonify({"privacy_links": links})
+
 
 if __name__ == "__main__":
     app.run(debug=True)

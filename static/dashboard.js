@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebas
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
+// Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyCBPoOtQOB7keoaTGM8BRiM62O5fkOjaCM",
     authDomain: "dataprivacytracker.firebaseapp.com",
@@ -11,6 +12,7 @@ const firebaseConfig = {
     appId: "1:477432653296:web:3dd325a0a093ad4222e935"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -23,7 +25,7 @@ const logoutButton = document.getElementById("logout");
 let currentUser;
 
 
-//check logib 
+//check if the user is logged in  
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUser = user;
@@ -70,6 +72,7 @@ async function loadApplications() {
             return;
         }
 
+        
         querySnapshot.forEach((doc) => {
             const appData = doc.data();
             
@@ -82,7 +85,7 @@ async function loadApplications() {
             appList.appendChild(li);
         });
 
-        // Add delete button event listeners
+        // Add delete button 
         document.querySelectorAll(".delete-btn").forEach((btn) => {
             btn.addEventListener("click", async (event) => {
                 const docId = event.target.getAttribute("data-id");

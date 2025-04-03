@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    //references to the elements in the DOM
     const grabButton = document.getElementById("grabButton");
     const websiteUrlInput = document.getElementById("websiteUrl");
     const dateInput = document.getElementById("dateInput");
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
         try {
-            
+            // Send a request to the server to grab snapshots
             const response = await fetch("/snapshots", {
                 method: "POST",
                 headers: {
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            //create a clickable list of all returned snapshot URLs
             data.forEach(link => {
                 const li = document.createElement("li");
                 const a = document.createElement("a");

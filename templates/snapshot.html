@@ -11,7 +11,6 @@
     <div class="container">
         <h2>Snapshot Grabber</h2>
 
-        <!-- Can add a date, but dont need to-->
         <input type="text" id="websiteUrl" placeholder="Enter URL">
         <input type="text" id="dateInput" placeholder="YYYY-MM-DD (optional)">
         <button id="grabButton">Grab Snapshots</button>
@@ -21,6 +20,10 @@
 
         <a href="{{ url_for('dashboard') }}">
             <button type="button">Back to Dashboard</button>
+        </a>
+
+        <a href="{{ url_for('privacy_finder') }}">
+            <button type="button">Go to Privacy Link Finder</button>
         </a>
         
         </div>
