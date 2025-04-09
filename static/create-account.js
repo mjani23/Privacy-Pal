@@ -40,7 +40,7 @@ submit.addEventListener('click', async function(event){
         });
 
         await setDoc(doc(db, "users", user.uid, "applications", "placeholder"), { empty: true });
-        window.location.href = "dashboard.html"; 
+        window.location.href = "dashboard"; 
     } catch (error) {
         alert(error.message);
     }

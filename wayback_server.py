@@ -5,12 +5,19 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/")
+# @app.route("/")
 
 @app.route("/privacy_finder")
 def privacy_finder():
     return render_template("privacy_finder.html")
 
+@app.route("/displayText")
+def display_text():
+    return render_template("displayText.html")
+
+@app.route("/comparison")
+def comparison():
+    return render_template("comparison.html")
 #Routes for web pages 
 @app.route("/login")
 def login():

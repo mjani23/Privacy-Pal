@@ -31,7 +31,7 @@ login.addEventListener('click', async function(event){
 
         //save to local storage
         localStorage.setItem("user", JSON.stringify({uid: user.uid, email: user.email}));
-        window.location.href = "dashboard";
+        window.location.href = "/snapshot";
     })
     .catch((error) => {
         const errorMessage = error.message;

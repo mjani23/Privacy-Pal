@@ -3,45 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Snapshot Grabber</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-  <script type="module" src="{{ url_for('static', filename='snapshot.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='comparison.js') }}"></script>
 </head>
 <body>
   <div class="wrapper">
     <div class="card">
-      <h1>Snapshot Grabber</h1>
-      <p class="subtitle">
+      <h1>Policy Comparisons</h1>
+      <!-- <p class="subtitle">
         Enter the website URL and you may alter the date.<br>
         We'll compare yoru dates privacy policy to one week prior.
-      </p>
+      </p> -->
 
-      <!-- Input fields for website URL and date -->
-      <div class="input-group">
+      <!-- <div class="input-group">
         <input type="text" id="websiteUrl" placeholder="Enter website URL" />
         <input type="text" id="dateInput" placeholder="YYYY-MM-DD (optional)" />
         <button id="grabButton" class="primary">Grab Snapshots</button>
-      </div>
+      </div> -->
 
         <!-- Display the results -->
         <div class="snapshot-columns">
           <div class="snapshot-box">
-            <div class="snapshot-label" id="enteredDateLabel">Entered Date</div>
-              <ul id="currentSnapshotList" class="snapshot-list"></ul>
+            <div class="snapshot-label" id="enteredDateLabel">Summary</div>
+              <!-- <ul id="currentSnapshotList" class="snapshot-list"></ul> -->
           </div>
-          <div class="snapshot-box">
-            <div class="snapshot-label" id="weekAgoDateLabel">Week Ago</div>
-              <ul id="weekAgoSnapshotList" class="snapshot-list"></ul>
-          </div>
+    
+        </div>
+
+        <div class="button-row" style="justify-content: center;">
+            <a href="{{ url_for('snapshot') }}">
+              <button class="primary">Back to Snapshot Page</button>
+            </a>
+
+            <a href="{{ url_for('display_text') }}">
+                <button class="primary">Back to Privacy Policies</button>
+              </a>
         </div>
 
       <!-- Logout and privacy link finder -->
-      <div class="button-row">
+      <!-- <div class="button-row">
         <button id="logout" class="primary">Logout</button>
         <a href="{{ url_for('privacy_finder') }}">
           <button class="primary">Go to Privacy Link Finder</button>
         </a>
-      </div>
+      </div> -->
     </div>
   </div>
 </body>
