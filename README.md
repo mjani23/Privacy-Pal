@@ -5,6 +5,8 @@ Set Up virtual enviornment:
 Install Dependencies:
     pip install flask flask-cors requests
     pip install selenium beautifulsoup4 lxml
+    pip install html2text
+    pip install html2text openai
 
 
 Run the Server: 

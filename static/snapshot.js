@@ -20,13 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const websiteUrlInput = document.getElementById("websiteUrl");
     const dateInput = document.getElementById("dateInput");
   
-    const today = new Date().toISOString().split("T")[0];
-    dateInput.value = today;
+	//sets the default date to today 
+	const today = new Date().toLocaleDateString("en-CA");
+	dateInput.value = today;
   
-    const currentSnapshotList = document.getElementById("currentSnapshotList");
-    const weekAgoSnapshotList = document.getElementById("weekAgoSnapshotList");
+	//grab the elements
+    const curSnapshot = document.getElementById("currentSnapshotList");
+    const OldSnapshot = document.getElementById("weekAgoSnapshotList");
     const logoutButton = document.getElementById("logout");
   
+	//logout button
     logoutButton.addEventListener("click", () => {
         signOut(auth).then(() => {
             window.location.href = "/login";
@@ -35,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
   
+	//grabs the url
     grabButton.addEventListener("click", async () => {
         const url = websiteUrlInput.value.trim();
         const date = dateInput.value.trim();
@@ -44,9 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
     
-        currentSnapshotList.innerHTML = "<li>Scraping Snapshots...</li>";
-        weekAgoSnapshotList.innerHTML = "<li>Scraping Snapshots...</li>";
+        curSnapshot.innerHTML = "<li>Scraping Snapshots...</li>";
+        OldSnapshot.innerHTML = "<li>Scraping Snapshots...</li>";
     
+		// Function to fetch snapshots
         const getSnapshots = async (url, date) => {
             const response = await fetch("/snapshots", {
             method: "POST",
@@ -69,17 +74,17 @@ document.addEventListener("DOMContentLoaded", () => {
             getSnapshots(url, weekAgoStr)
         ]);
   
+		//this generates the link for the date and a week ago 
         const renderLinks = (container, data) => {
-          container.innerHTML = "";
-          if (data.error) {
-            container.innerHTML = `<li>Error: ${data.error}</li>`;
-          } else if (!Array.isArray(data)) {
-            container.innerHTML = "<li>Unexpected response format</li>";
-          } else if (data.length === 0) {
-            container.innerHTML = "<li>No snapshots found.</li>";
-          } else {
+		container.innerHTML = "";
+		if (data.error) {
+			container.innerHTML = `<li>Error: ${data.error}</li>`;
+		} else if (data.length === 0) {
+			container.innerHTML = "<li>No snapshots found.</li>";
+		} else {
             if (data.length > 0) {
-                const mostRecentLink = data[0];  // assume the most recent snapshot is first
+				//we only want to grab most recent link
+                const mostRecentLink = data[0];  
                 const li = document.createElement("li");
                 const a = document.createElement("a");
                 a.href = mostRecentLink;
@@ -88,17 +93,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 li.appendChild(a);
                 container.appendChild(li);
             } else {
-            container.innerHTML = "<li>No snapshots found.</li>";
+            	container.innerHTML = "<li>No snapshots found.</li>";
             }
           }
         };
   
-        renderLinks(currentSnapshotList, currData);
-        renderLinks(weekAgoSnapshotList, weekAgoData);
+		// Clear previous results and use new links
+        renderLinks(curSnapshot, currData);
+        renderLinks(OldSnapshot, weekAgoData);
+
+		//store links in local storage 
+		if (currData.length > 0) {
+			localStorage.setItem("currentSnapshot", currData[0]);
+		}
+		if (weekAgoData.length > 0) {
+			localStorage.setItem("weekAgoSnapshot", weekAgoData[0]);
+		}
   
-      } catch (err) {
-        currentSnapshotList.innerHTML = `<li>Request failed: ${err.message}</li>`;
-        weekAgoSnapshotList.innerHTML = `<li>Request failed: ${err.message}</li>`;
-      }
+	} catch (err) {
+		curSnapshot.innerHTML = `<li>Request failed: ${err.message}</li>`;
+		OldSnapshot.innerHTML = `<li>Request failed: ${err.message}</li>`;
+	}
     });
   });

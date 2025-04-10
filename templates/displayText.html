@@ -11,26 +11,21 @@
   <div class="wrapper">
     <div class="card">
       <h1>Display Summary Texts</h1>
-      <!-- <p class="subtitle">
-        Enter the website URL and you may alter the date.<br>
-        We'll compare yoru dates privacy policy to one week prior.
-      </p> -->
 
-      <!-- <div class="input-group">
-        <input type="text" id="websiteUrl" placeholder="Enter website URL" />
-        <input type="text" id="dateInput" placeholder="YYYY-MM-DD (optional)" />
-        <button id="grabButton" class="primary">Grab Snapshots</button>
-      </div> -->
+
+      <div class="input-group">
+        <input type="text" id="currentUrl" placeholder="Enter Current Snapshot URL" />
+        <input type="text" id="weekAgoUrl" placeholder="Enter Week Ago Snapshot URL" />
+        <button id="fetchButton" class="primary">Fetch Summaries</button>
+      </div>
 
         <!-- Display the results -->
         <div class="snapshot-columns">
           <div class="snapshot-box">
             <div class="snapshot-label" id="enteredDateLabel">Current Policy</div>
-              <!-- <ul id="currentSnapshotList" class="snapshot-list"></ul> -->
           </div>
           <div class="snapshot-box">
             <div class="snapshot-label" id="weekAgoDateLabel">Previous Policy</div>
-              <!-- <ul id="weekAgoSnapshotList" class="snapshot-list"></ul> -->
           </div>
         </div>
 
@@ -44,13 +39,7 @@
             </a>
         </div>
 
-      <!-- Logout and privacy link finder -->
-      <!-- <div class="button-row">
-        <button id="logout" class="primary">Logout</button>
-        <a href="{{ url_for('privacy_finder') }}">
-          <button class="primary">Go to Privacy Link Finder</button>
-        </a>
-      </div> -->
+    
     </div>
   </div>
 </body>
