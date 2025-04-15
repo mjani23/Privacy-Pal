@@ -11,12 +11,9 @@ h.ignore_links = True
 h.ignore_images = True
 
 
-
-
 app = Flask(__name__)
 CORS(app)
 
-# @app.route("/")
 
 # Bens code to get the html, convert it to text, and then send it to the AI model
 @app.route("/fetch_html", methods=["POST"])
@@ -28,6 +25,7 @@ def fetch_html():
         html_content = response.text
         final_text = h.handle(html_content)
         ai_response = client.responses.create(model="gpt-4o",
+                                        temperature=0,
                                         instructions="Take this privacy policy and give me the key points about it, any potential issues, and any potenial benefits we have. Provide the response as plain text, which means: no bold, no italics, no headers, no bullet points, no links, no code blocks. Just words, without any special characters.",
                                         input=final_text).output_text
         
@@ -102,7 +100,6 @@ def get_snapshots():
             return []
 
         # makes timestamps into Wayback snapshot URLs
-
         results = [
             f"https://web.archive.org/web/{timestamp}/{original}"
             for timestamp, original in data[1:]
