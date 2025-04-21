@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const storedWeekAgo = localStorage.getItem("weekAgoPrivacyLink");
     if (storedCurrent) currentInput.value = storedCurrent;
     if (storedWeekAgo) weekAgoInput.value = storedWeekAgo;
-  
+    
     //grabs the html and converts it to text 
     async function fetchSummary(url, targetBox) {
         
@@ -25,11 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
       const data = await response.json();
       targetBox.innerHTML = "";
+      targetBox.textContent = "";
   
         if (data.html) {
-            const p = document.createElement("p");
-            p.textContent = data.html;
-            targetBox.appendChild(p);
+          targetBox.innerHTML = data.html;  
         } else {
             targetBox.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
         }

@@ -4,6 +4,7 @@ import requests
 import html2text
 from openai import OpenAI
 from extract_privacy import extract_privacy_links
+import markdown
 
 client = OpenAI(api_key="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")
 h = html2text.HTML2Text()
@@ -25,13 +26,15 @@ def fetch_html():
         html_content = response.text
         final_text = h.handle(html_content)
         ai_response = client.responses.create(model="gpt-4o",
-                                        temperature=0,
-                                        instructions="Take this privacy policy and give me the key points about it, any potential issues, and any potenial benefits we have. Provide the response as plain text, which means: no bold, no italics, no headers, no bullet points, no links, no code blocks. Just words, without any special characters.",
+                                        temperature=1,
+                                        
+                                        instructions="I passed you a privacy policy, Take out and format the key points as clearly labeled bold subheaders. After identifying the key points, list under each key point an explaination. After listing all key points, create a new section called " + "Potential Issues" + "and another called "+ "Potential Benefits"+", each following the same format. The structure needs to be clean, direct, and easy-to-the-eye. This output must be in markdown format, but only utilize bullet points, bold, and headers. Do not include anything that says '''markdown." , 
                                         input=final_text).output_text
         
         
-            
-        return jsonify({"html": ai_response})
+        
+        
+        return jsonify({"html": markdown.markdown(ai_response)})
     else:
         print("Failed: ",response.status_code)
         return jsonify({"error": "Failed"}), response.status_code
@@ -132,4 +135,4 @@ def extract_privacy():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port = 1111,debug=True)
