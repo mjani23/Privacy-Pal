@@ -27,12 +27,21 @@ document.addEventListener("DOMContentLoaded", () => {
       targetBox.innerHTML = "";
       targetBox.textContent = "";
   
-        if (data.html) {
-          targetBox.innerHTML = data.html;  
-        } else {
-            targetBox.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
-        }
+
+
+      if (data.html) {
+        targetBox.innerHTML = data.html;  
+        if(targetBox === currentBox) {
+          localStorage.setItem("summaryCurrent", data.html);
+        }else if(targetBox === weekAgoBox) {
+          localStorage.setItem("summaryWeek", data.html);
+                }
+      } else {
+        targetBox.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
+      }
     }
+
+    
   
     fetchButton.addEventListener("click", () => {
       const currentUrl = currentInput.value.trim();

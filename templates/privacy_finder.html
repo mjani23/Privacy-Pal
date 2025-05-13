@@ -1,50 +1,3 @@
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Find Privacy Policy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-  <script type="module" src="{{ url_for('static', filename='privacy_finder.js') }}"></script>
-</head>
-
-
-<body>
-
-  <div class="wrapper">
-    <div class="card">
-      <h1>Find Privacy Policy from Snapshot</h1>
-      <p class="subtitle">
-        Enter a Wayback Machine snapshot URL to locate the site's privacy policy.
-      </p>
-
-      <div class="input-group">
-        <input type="text" id="snapshotUrl" placeholder="Enter Current URL" />
-        <button id="findPrivacyButton" class="primary">Fetch Privacy Policy</button>
-      </div>
-
-      <div class="input-group">
-        <input type="text" id="snapshotUrl" placeholder="Enter Week Prior URL" />
-        <button id="fetchPrivacyButton" class="primary">Fetch Privacy Policy</button>
-
-      <ul id="privacyResults" class="snapshot-list"></ul>
-
-      <div class="button-row" style="justify-content: center;">
-        <a href="{{ url_for('snapshot') }}">
-          <button class="primary">Back to Snapshot Page</button>
-        </a>
-        <a href="{{ url_for('display_text') }}">
-          <button class="primary">See Privacy Policies</button>
-        </a>
-      </div>
-
-      
-    </div>
-  </div>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,10 +22,10 @@
       </div>
       <ul id="currentResults" class="snapshot-list"></ul>
 
-      <!-- Week-Ago URL -->
+      <!-- Month-Ago URL -->
       <div class="input-group">
         <input type="text" id="weekAgoUrl" placeholder="Enter Week-Prior Snapshot URL" />
-        <button id="fetchWeekAgoBtn" class="primary">Fetch Week-Ago Policy</button>
+        <button id="fetchWeekAgoBtn" class="primary">Fetch Month-Ago Policy</button>
       </div>
       <ul id="weekAgoResults" class="snapshot-list"></ul>
 

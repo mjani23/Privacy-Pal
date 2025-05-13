@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/mjani23/Privacy-Proctor-/issues"
   },
-  "homepage": "https://github.com/mjani23/Privacy-Proctor-#readme"
+  "homepage": "https://github.com/mjani23/Privacy-Proctor-#readme",
+  "dependencies": {
+    "openai": "^4.95.1"
+  }
 }

@@ -4,29 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-  <script type="module" src="{{ url_for('static', filename='comparison.js') }}">
-
-
-
-
-
-
-
-
-
-
-
-  </script>
+  <script type="module" src="{{ url_for('static', filename='comparison.js') }}"></script>
 </head>
 <body>
   <div class="wrapper">
     <div class="card">
       <h1>Policy Comparisons</h1>
+      <h2>***Disclaimer - If the policies given do not differ, the AI summary will be unreliable***</h2>
         <!-- Display the results -->
         <div class="snapshot-columns">
           <div class="snapshot-box">
-            <div class="snapshot-label" id="enteredDateLabel">Summary</div>
-              <!-- <ul id="currentSnapshotList" class="snapshot-list"></ul> -->
+              <div class="snapshot-label">Comparison Summary</div>
+              <div id="compaison_box" class="snapshot-content"></div>
+                          <!-- <ul id="currentSnapshotList" class="snapshot-list"></ul> -->
           </div>
     
         </div>

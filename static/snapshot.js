@@ -63,11 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
       // Calculate week-ago date
         const weekAgoDate = new Date(date);
-        weekAgoDate.setDate(weekAgoDate.getDate() - 7);
+        weekAgoDate.setDate(weekAgoDate.getDate() - 365);
         const weekAgoStr = weekAgoDate.toISOString().split("T")[0];
     
         document.getElementById("enteredDateLabel").textContent = `Entered Date (${date})`;
-        document.getElementById("weekAgoDateLabel").textContent = `Week Ago (${weekAgoStr})`;
+        document.getElementById("weekAgoDateLabel").textContent = `Month Ago (${weekAgoStr})`;
         try {
         const [currData, weekAgoData] = await Promise.all([
             getSnapshots(url, date),
